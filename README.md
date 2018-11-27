@@ -1,4 +1,5 @@
 # Omnipay: BillPay
+[![Build Status](https://travis-ci.org/SeoFood/omnipay-billpay.svg?branch=master)](https://travis-ci.org/SeoFood/omnipay-billpay)
 
 **BillPay driver for the Omnipay PHP payment processing library**
 
