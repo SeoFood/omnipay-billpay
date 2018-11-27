@@ -432,28 +432,6 @@ class GatewayTest extends GatewayTestCase
         );
     }
 
-    public function testRawData()
-    {
-        $this->setMockHttpResponse('Preauthorize.txt');
-
-        $request = $this->gateway->authorize($this->options);
-        $request->setCustomerDetails($this->customer);
-        $request->setItems($this->items);
-        $request->setCard($this->card);
-        $request->setPaymentMethod(AuthorizeRequest::PAYMENT_TYPE_INVOICE);
-
-        $request->send();
-
-        $rawRequest = $request->getRawLastHttpRequest();
-        $rawResponse = $request->getRawLastHttpResponse();
-
-        self::assertContains('Host: api.billpay.de', $rawRequest);
-        self::assertContains('mid="4441" pid="6021" bpsecure="550e1bafe077ff0b0b67f4e32f29d751"', $rawRequest);
-        self::assertContains('<?xml version="1.0" encoding="UTF-8" standalone="no"?>', $rawResponse);
-        self::assertContains('Content-Type: application/xml; charset=utf-8', $rawResponse);
-        self::assertContains('bptid="1aa2fb2d-2b78-4393-bf06-be0012dda337"', $rawResponse);
-    }
-
     public function testRefundSuccess()
     {
         $this->setMockHttpResponse('Cancel.txt');

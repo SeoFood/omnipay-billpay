@@ -2,7 +2,7 @@
 
 namespace Omnipay\BillPay;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CustomerTest
@@ -12,7 +12,7 @@ use PHPUnit_Framework_TestCase;
  * @copyright 2016, Connox GmbH
  * @license   MIT
  */
-class CustomerTest extends PHPUnit_Framework_TestCase
+class CustomerTest extends TestCase
 {
     public function testDefaultParameters()
     {

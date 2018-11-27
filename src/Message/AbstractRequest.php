@@ -23,16 +23,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     protected $testEndpoint = 'https://test-api.billpay.de/xml/offline';
 
     /**
-     * @var string
-     */
-    protected $rawLastHttpRequest;
-
-    /**
-     * @var string
-     */
-    protected $rawLastHttpResponse;
-
-    /**
      * @param string $country
      *
      * @return string|null ISO-3166-1 Alpha3
@@ -76,26 +66,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
-     * Gets the raw http request of the last request including header lines.
-     *
-     * @return string
-     */
-    public function getRawLastHttpRequest()
-    {
-        return $this->rawLastHttpRequest;
-    }
-
-    /**
-     * Gets the raw http response of the last request including header lines.
-     *
-     * @return string
-     */
-    public function getRawLastHttpResponse()
-    {
-        return $this->rawLastHttpResponse;
-    }
-
-    /**
      * @return string MD5 hash of the security key generated for this portal. (generated and delivered by BillPay)
      */
     public function getSecurityKey()
@@ -118,13 +88,9 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             throw new InvalidRequestException('Data must be XML.');
         }
 
-        $httpRequest = $this->httpClient->post($this->getEndpoint(), null, (string)$data->asXML());
-        $this->rawLastHttpRequest = (string)$httpRequest;
+        $response = $this->httpClient->request('post', $this->getEndpoint(), [], (string) $data->asXML());
 
-        $httpResponse = $httpRequest->send();
-        $this->rawLastHttpResponse = $httpResponse->getMessage();
-
-        return $this->createResponse($httpResponse->xml());
+        return $this->createResponse(simplexml_load_string($response->getBody()->getContents()));
     }
 
     /**

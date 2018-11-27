@@ -96,7 +96,7 @@ class AuthorizeRequestTest extends TestCase
 
     public function testAmountDifference()
     {
-        self::setExpectedException(
+        self::expectException(
             InvalidRequestException::class,
             'Amount (23.95) differs from calculated amount (0.00) (items + shipping - rebate).'
         );
@@ -106,7 +106,7 @@ class AuthorizeRequestTest extends TestCase
 
     public function testCardNotExist()
     {
-        self::setExpectedException(
+        self::expectException(
             InvalidRequestException::class,
             'Credit card object required.'
         );
@@ -116,7 +116,7 @@ class AuthorizeRequestTest extends TestCase
 
     public function testCustomerNotExist()
     {
-        self::setExpectedException(InvalidRequestException::class, 'Customer object required.');
+        self::expectException(InvalidRequestException::class, 'Customer object required.');
         $this->request->setCustomerDetails(null);
         $this->request->getData();
     }
@@ -146,7 +146,7 @@ class AuthorizeRequestTest extends TestCase
 
     public function testItemsIncorrectType()
     {
-        self::setExpectedException(
+        self::expectException(
             InvalidRequestException::class,
             'All items must be of instance of Omnipay\BillPay\Item'
         );
@@ -171,14 +171,14 @@ class AuthorizeRequestTest extends TestCase
 
     public function testItemsNotExist()
     {
-        self::setExpectedException(InvalidRequestException::class, 'Item objects are required.');
+        self::expectException(InvalidRequestException::class, 'Item objects are required.');
         $this->request->setItems(null);
         $this->request->getData();
     }
 
     public function testPaymentMethodInvalid()
     {
-        self::setExpectedException(
+        self::expectException(
             InvalidRequestException::class,
             'Unknown payment method specified \'bananas\' specified.'
         );
@@ -188,7 +188,7 @@ class AuthorizeRequestTest extends TestCase
 
     public function testPaymentMethodNotSet()
     {
-        self::setExpectedException(InvalidRequestException::class, 'This request requires a payment method.');
+        self::expectException(InvalidRequestException::class, 'This request requires a payment method.');
         $this->request->setPaymentMethod(null);
         $this->request->getData();
     }

@@ -6,7 +6,7 @@ use Mockery;
 use Omnipay\BillPay\Message\AbstractRequest;
 use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Common\Message\MessageInterface;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class AbstractRequestTest
@@ -16,14 +16,14 @@ use PHPUnit_Framework_TestCase;
  * @copyright 2016, Connox GmbH
  * @license   MIT
  */
-class AbstractRequestTest extends PHPUnit_Framework_TestCase
+class AbstractRequestTest extends TestCase
 {
     public function testDefectXmlSend()
     {
         $mock = Mockery::mock(AbstractRequest::class, MessageInterface::class)->makePartial();
         $mock->shouldReceive('getData')->andReturn(null);
 
-        self::setExpectedException(InvalidRequestException::class);
+        self::expectException(InvalidRequestException::class);
 
         /** @var AbstractRequest $mock */
         $mock->send();

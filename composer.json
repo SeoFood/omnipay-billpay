@@ -1,5 +1,5 @@
 {
-    "name": "connox/omnipay-billpay",
+    "name": "seofood/omnipay-billpay",
     "type": "library",
     "description": "BillPay gateway for Omnipay payment processing library",
     "keywords": [
@@ -11,9 +11,13 @@
         "billpay",
         "purchase"
     ],
-    "homepage": "https://github.com/Connox/omnipay-billpay",
+    "homepage": "https://seofood.de",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Marco Hillger",
+            "email": "marco@seofood.de"
+        },
         {
             "name": "Andreas Lange",
             "email": "andreas.lange@connox.de"
@@ -25,12 +29,12 @@
         }
     },
     "require": {
-        "php": ">=5.6",
-        "ext-bcmath": "*",
-        "omnipay/common": "~2.0"
+        "omnipay/common": "^3",
+        "ext-bcmath": "*"
     },
     "require-dev": {
-        "omnipay/tests": "~2.0",
-        "fabpot/php-cs-fixer": "~1.0"
+        "squizlabs/php_codesniffer": "^3",
+        "omnipay/tests": "^3",
+        "phpro/grumphp": "^0.14"
     }
 }
